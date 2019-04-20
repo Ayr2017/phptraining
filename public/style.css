@@ -1,0 +1,156 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+
+.h-space {
+  height:5px;
+}
+
+body {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: stretch;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #535253;
+  font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 100;
+}
+
+header {
+  display: flex;
+  background: #8B3E86;
+  color: #EEF1EE;
+  height:15%;
+  padding: 10px;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  min-height: 85%;
+}
+
+.showingblock {
+  flex-grow: 3;
+  flex-shrink: 1;
+}
+
+.searchingblock {
+  flex-grow: 1;
+  flex-shrink: 10;
+  max-width: 320px;
+  padding:5px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px 2px #808080;
+}
+
+.searchingblock__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchingblock__textfield {
+  box-sizing: border-box;
+  height: 2rem;
+}
+
+.searchingblock__button {
+  height: 2rem;
+  background-color: #8B3E86;
+  color: #EEF1EE;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 2px 2px 2px  #808080;
+}
+
+.checks { 
+  max-height: 15rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.checks__title {
+  text-align: center
+}
+
+.showingblock__list {
+  display:flex;
+  flex-direction:column;
+  padding: 1rem;
+  margin:0;
+}
+
+.showingblock__item {
+  display: flex;
+  padding:0.1rem;
+  margin: 0;
+  list-style-type: none;  
+  min-height: 5rem;
+  border-bottom: 1px solid gainsboro;
+}
+
+.showingblock__item:nth-child(n) {
+  background: rgb(232, 242, 252);
+}
+
+.showingblock__item:nth-child(2n) {
+  background: rgb(190, 205, 206);
+}
+
+.showingblock__item:hover .showingblock__title{
+  color: #94028A;
+}
+
+.showingblock__item:hover {
+  border-bottom: 1px solid rgb(175, 166, 175);
+  box-shadow: 0 -3px 6px #333;
+}
+.showingblock__image {
+  width:5rem;
+  height: 5rem;
+  background-color: #979396;
+  background-image: url('../pictures/img.jpg');
+  background-size: cover;
+}
+
+.showingblock__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.showingblock__title {
+  line-height: 1rem;
+  padding:0.2rem;
+}
+
+.showingblock__additional {
+  display: flex;
+  flex-direction: row;
+  padding: 0.2rem;
+  text-align: center;
+}
+
+.showingblock__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.showingblock__button {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #aaa;
+  line-height: 1rem;
+  color: white
+}
+
+.showingblock__author, .showingblock__genre{
+  text-align: left;
+  padding: 0 5px 0;
+}
