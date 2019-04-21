@@ -70,6 +70,8 @@ main {
 }
 
 .checks { 
+  display: flex;
+  flex-direction: column;
   max-height: 15rem;
   overflow-y: auto;
   overflow-x: hidden;
@@ -78,6 +80,7 @@ main {
 .checks__title {
   text-align: center
 }
+
 
 .showingblock__list {
   display:flex;
@@ -109,7 +112,7 @@ main {
 
 .showingblock__item:hover {
   border-bottom: 1px solid rgb(175, 166, 175);
-  box-shadow: 0 -3px 6px #333;
+  box-shadow: 0 -3px 6px #aaa;
 }
 .showingblock__image {
   width:5rem;
