@@ -67,7 +67,8 @@
 
           <div class="checks">
             <h3 class="checks__title">Author</h3>
-            <hr><ul class="checks__list">
+            <hr>
+            <ul class="checks__list">
               <li class="checks__element" v-for='getGenre in genresArray'>
               <label class="cheks__label" ><input class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem"> {{getGenre.name}}</label>
               </li>
@@ -78,7 +79,7 @@
             <hr>
             <ul class="checks__list">
               <li class="checks__element" v-for='getGenre in genresArray'>
-              <label class="cheks__label" ><input class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem"> {{getGenre.name}}</label>
+              <label class="cheks__label" ><input class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem" v-model="toggle"> {{getGenre.name}}</label>
               </li>
             </ul>
             
@@ -96,7 +97,8 @@
       data() {
         return {
           genresArray: null,
-          bookName: ''
+          bookName: '',
+          toggle:null
         };
       },
       methods: {
