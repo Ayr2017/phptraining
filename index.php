@@ -18,38 +18,16 @@
     <main class="exp">
       <div class="showingblock exp">
         <ul class="showingblock__list">
-          <li class="showingblock__item">
+          <li class="showingblock__item" v-for = "getBook in booksArray">
             <div class="showingblock__image"></div>
             <div class="showingblock__info">
-              <h3 class="showingblock__title">Name of the book</h3>
+              <h3 class="showingblock__title">{{getBook.book_name}}</h3>
               <div class="showingblock__additional">
                 <div class="showingblock__button">+</div>
                 <div class="showingblock__wrapper">
-                  <div class="showingblock__author">Автор: Author Name</div>
-                  <div class="showingblock__genre">Жанр: Genre Name</div>
+                  <div class="showingblock__author">Автор: {{getBook["GROUP_CONCAT(aut_name)"]}} </div>
+                  <div class="showingblock__genre">Жанр: {{getBook["GROUP_CONCAT(gen_name)"]}}</div>
                 </div>
-              </div>
-            </div>
-          </li>
-          <li class="showingblock__item">
-            <div class="showingblock__image"></div>
-            <div class="showingblock__info">
-              <h3 class="showingblock__title">Name of the book</h3>
-              <div class="showingblock__additional">
-                <div class="showingblock__button">+</div>
-                <div class="showingblock__author"></div>
-                <div class="showingblock__genre"></div>
-              </div>
-            </div>
-          </li>
-          <li class="showingblock__item">
-            <div class="showingblock__image"></div>
-            <div class="showingblock__info">
-              <h3 class="showingblock__title">Name of the book</h3>
-              <div class="showingblock__additional">
-                <div class="showingblock__button">+</div>
-                <div class="showingblock__author"></div>
-                <div class="showingblock__genre"></div>
               </div>
             </div>
           </li>
@@ -61,25 +39,29 @@
           
           <div class="h-space"></div>
 
-          <input type="button" value="Поиск" class="searchingblock__button" @click="booksArray()" >
+          <input type="button" value="Поиск" class="searchingblock__button" @click="getBooksArray()" >
 
           <div class="h-space"></div>
 
           <div class="checks">
-            <h3 class="checks__title">Author</h3>
+            <h3 class="checks__title">Авторы</h3>
             <hr>
             <ul class="checks__list">
-              <li class="checks__element" v-for='getGenre in genresArray'>
-              <label class="cheks__label" ><input class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem"> {{getGenre.name}}</label>
+              <li class="checks__element" v-for='getAuthor in authorsArray'>
+              <label class="cheks__label" >
+                <input class="cheks__input" type="checkbox" name="author" :value="getAuthor.id" class="checks__elem"> 
+                {{getAuthor.name}} {{getAuthor.surname}}</label>
               </li>
             </ul>
           </div>
           <div class="checks">
-            <h3 class="checks__title">Genre</h3>
+            <h3 class="checks__title">Жанры</h3>
             <hr>
             <ul class="checks__list">
               <li class="checks__element" v-for='getGenre in genresArray'>
-              <label class="cheks__label" ><input class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem" v-model="toggle"> {{getGenre.name}}</label>
+              <label class="cheks__label">
+                <input class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem" > {{getGenre.name}}
+              </label>
               </li>
             </ul>
             
@@ -97,26 +79,42 @@
       data() {
         return {
           genresArray: null,
+          authorsArray: null,
+          booksArray:null,
           bookName: '',
           toggle:null
         };
       },
       methods: {
-        booksArray() {
-          alert(this.bookName)
-          // axios
-          // .get('testPage.php?name='+this.bookName)
-          // .then(response =>{
-          //   (this.booksArray = response.data)
-          // });
-        }
-      },
-      mounted() {
-        axios
-          .get('controllers/booksControl.php')
+        getBooksArray() {
+          // alert(this.bookName )
+          axios
+          .get('controllers/bookControl.php')
+          .then(response =>{
+            (this.booksArray = response.data);
+            console.dir(response.data);
+          });
+        },
+        getGenresArray(){
+          axios
+          .get('controllers/genreControl.php')
           .then(response =>{
             (this.genresArray = response.data)
           });
+        },
+        getAuthorsArray(){
+          axios
+          .get('controllers/authorControl.php')
+          .then(response =>{
+            (this.authorsArray = response.data);
+            //console.log(response.data);
+          });
+        }
+      },
+      mounted() {
+        this.getGenresArray();
+        this.getAuthorsArray();
+        this.getBooksArray();
       }
 });
   </script>
