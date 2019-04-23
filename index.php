@@ -36,7 +36,7 @@
       </div>
       <div class="searchingblock ">
         <form action="#" method="getGenre" class="searchingblock__form">
-          <input v-model="bookName" type="text" name="bookname" id="bookname__input" class="searchingblock__textfield">
+          <input type="text" @keyup="getBooksArray" @keyup.enter.prevent="getBooksArray" v-model="bookName"  name="bookname" id="bookname__input" class="searchingblock__textfield">
           
           <div class="h-space"></div>
 
@@ -50,7 +50,7 @@
             <ul class="checks__list">
               <li class="checks__element" v-for='getAuthor in authorsArray'>
               <label class="cheks__label" >
-                <input class="cheks__input" type="checkbox" name="author" :value="getAuthor.id" class="checks__elem"> 
+                <input v-model="authorId" @change="getBooksArray" @blur="getBooksArray" class="cheks__input" type="checkbox" name="author" :value="getAuthor.id" class="checks__elem"> 
                 {{getAuthor.name}} {{getAuthor.surname}}</label>
               </li>
             </ul>
@@ -61,7 +61,7 @@
             <ul class="checks__list">
               <li class="checks__element" v-for='getGenre in genresArray'>
               <label class="cheks__label">
-                <input class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem" > {{getGenre.name}}
+                <input v-model="genreId" @change="getBooksArray" class="cheks__input" type="checkbox" name="genre" :value="getGenre.id" class="checks__elem" > {{getGenre.name}}
               </label>
               </li>
             </ul>
@@ -72,8 +72,6 @@
 
     <footer></footer>
     <script>
-    
-    
      function toggleInfo(element){
       if(element.vis) {
         element.nextElementSibling.style.display = 'none';
@@ -82,9 +80,9 @@
         element.nextElementSibling.style.display = 'flex';
         element.vis = true; }
      }
-    
     </script>
-  
+
+    
     <script>
     new Vue({
       el: '.exp',
@@ -94,6 +92,8 @@
           authorsArray: null,
           booksArray:null,
           bookName: '',
+          authorId: [],
+          genreId: [],
           toggle:null
         };
       },
@@ -101,7 +101,7 @@
         getBooksArray() {
           console.log(this.bookName);
           axios
-          .get(`controllers/bookControl.php?q="${this.bookName}"`)
+          .get(`controllers/bookControl.php?bookname="${(this.bookName).trim()|| "%"}"&authorid="${this.authorId.join(',') || "%"}"&genreid="${this.genreId .join(',') || "%"}"`)
           .then(response =>{
             (this.booksArray = response.data);
           });
