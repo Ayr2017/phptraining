@@ -20,7 +20,7 @@
       <div class="showingblock exp">
         <ul class="showingblock__list">
           <li class="showingblock__item" v-for = "getBook in booksArray">
-            <div class="showingblock__image"></div>
+            <div class="showingblock__image" style="background-image:getBook.book_img"></div>
             <div class="showingblock__info">
               <h3 class="showingblock__title">{{getBook.book_name}}</h3>
               <div class="showingblock__additional">
@@ -104,6 +104,7 @@
           .get(`controllers/bookControl.php?bookname="${(this.bookName).trim()|| "%"}"&authorid="${this.authorId.join(',') || "%"}"&genreid="${this.genreId .join(',') || "%"}"`)
           .then(response =>{
             (this.booksArray = response.data);
+            console.log(response.data);
           });
         },
         getGenresArray(){

@@ -19,7 +19,7 @@
       FROM (genre JOIN books_has_genre ON books_has_genre.genre_id = genre.id) 
       JOIN books ON books.id=books_has_genre.books_id 
         WHERE genre_id LIKE $genreid GROUP BY book_id ) AS B ON A.book_id = B.book_id 
-      WHERE A.book_name LIKE $bookname /* AND aut_id LIKE $authorid AND gen_id LIKE $genreid */
+      WHERE A.book_name LIKE $bookname 
       GROUP BY A.book_id");
     }
   }
