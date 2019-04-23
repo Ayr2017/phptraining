@@ -140,7 +140,7 @@ main {
 }
 
 .showingblock__wrapper {
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 
@@ -150,7 +150,8 @@ main {
   border-radius: 50%;
   background-color: #aaa;
   line-height: 1rem;
-  color: white
+  color: white;
+  cursor: pointer;
 }
 
 .showingblock__author, .showingblock__genre{

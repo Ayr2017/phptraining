@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -23,8 +24,8 @@
             <div class="showingblock__info">
               <h3 class="showingblock__title">{{getBook.book_name}}</h3>
               <div class="showingblock__additional">
-                <div class="showingblock__button">+</div>
-                <div class="showingblock__wrapper">
+                <div class="showingblock__button" onclick="toggleInfo(this)">+</div>
+                <div class="showingblock__wrapper ">
                   <div class="showingblock__author">Автор: {{getBook["GROUP_CONCAT(aut_name)"]}} </div>
                   <div class="showingblock__genre">Жанр: {{getBook["GROUP_CONCAT(gen_name)"]}}</div>
                 </div>
@@ -64,14 +65,25 @@
               </label>
               </li>
             </ul>
-            
           </div>
         </form>
       </div>
-      
     </main>
 
     <footer></footer>
+    <script>
+    
+    
+     function toggleInfo(element){
+      if(element.vis) {
+        element.nextElementSibling.style.display = 'none';
+        element.vis = false; }
+      else {
+        element.nextElementSibling.style.display = 'flex';
+        element.vis = true; }
+     }
+    
+    </script>
   
     <script>
     new Vue({
@@ -87,12 +99,11 @@
       },
       methods: {
         getBooksArray() {
-          // alert(this.bookName )
+          console.log(this.bookName);
           axios
-          .get('controllers/bookControl.php')
+          .get(`controllers/bookControl.php?q="${this.bookName}"`)
           .then(response =>{
             (this.booksArray = response.data);
-            console.dir(response.data);
           });
         },
         getGenresArray(){
@@ -107,7 +118,6 @@
           .get('controllers/authorControl.php')
           .then(response =>{
             (this.authorsArray = response.data);
-            //console.log(response.data);
           });
         }
       },
